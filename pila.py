@@ -40,6 +40,17 @@ class Pila():
                 self.add(total)
                 self.cadenaRes = self.cadenaRes + "push(" + str(total) + ")\n"
 
+            elif espacios[x] is "/":
+               # print("saca: " + self.pop())
+                self.cadenaRes = self.cadenaRes + "pop() = " + self.pop() + "\n"
+                primero = self.pop()
+                segundo = self.pop()
+                total = int(float(segundo) / float(primero))
+                #print (str(primero) + " - " + str(segundo) + " = " + str(total))
+                self.cadenaRes = self.cadenaRes + str(primero) + " / " + str(segundo) + " = " + str(total) + "\n"
+                self.add(total)
+                self.cadenaRes = self.cadenaRes + "push(" + str(total) + ")\n"
+
             elif espacios[x] is "*":
                 #print("saca: " + self.pop())
                 self.cadenaRes = self.cadenaRes + "pop() = " + self.pop() + "\n"

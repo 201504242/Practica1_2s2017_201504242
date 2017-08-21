@@ -78,6 +78,11 @@ def leerXML():
 def mensaje():
     inorden = str(request.form['inorden'])
     inorden = inorden.replace('?','+')
+    inorden = inorden.replace('@','-')
+    inorden = inorden.replace('&','/')
+    inorden = inorden.replace('#','*')
+
+
     buscado = listadoIP.buscar(listadoIP.ipServidor)
     if buscado is None:
         return "false"
