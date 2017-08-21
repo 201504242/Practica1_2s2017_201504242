@@ -3,6 +3,7 @@ app = Flask("EDD_codigo_ejemplo")
 import lista
 import json
 
+
 import os
 listadoIP = lista.Lista()
 
@@ -59,8 +60,9 @@ def leerJSON():
     except:
         return "False"
 
-
-
+@app.route("/leerXML",methods=['POST']) #INSERTA DATOS
+def leerJSON():
+    print "a"
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
     #app.run(debug=True)
