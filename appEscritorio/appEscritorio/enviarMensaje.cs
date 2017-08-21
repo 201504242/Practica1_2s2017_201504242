@@ -13,6 +13,8 @@ namespace appEscritorio
     public partial class enviarMensaje : Form
     {
         conexion con = new conexion();
+        String server = dashboard.IpServidor;
+        List<mensaje> mensajes = new List<mensaje>();
         public enviarMensaje()
         {
             InitializeComponent();
@@ -25,7 +27,24 @@ namespace appEscritorio
             if (file.ShowDialog() == DialogResult.OK)
             {
                 path = file.FileName;
-                string retorno = con.getConexionPOST(con.getIP(), "mensaje", "inorden=" + path).ToString();
+                string retorno = con.getConexionPOST(con.getIP(), "leerXML", "ubicacion=" + path).ToString();
+                String[] Spliter = retorno.Split('?');
+                for (int i = 1; i < Spliter.Length; i = i +2)
+                {
+                    mensajes.Add(new mensaje(Spliter[i], Spliter[i + 1]));
+                }
+                foreach (var item in mensajes)
+                {
+                    string metodoMensaje = con.getConexionPOST(item.Ip, "mensaje", "inorden=" + item.Texto).ToString();
+                    if (metodoMensaje.Equals("true"))
+                    {
+                        MessageBox.Show("EXITO");
+                    }
+                    else
+                    {
+                        MessageBox.Show("FALLO: " + item.Ip + " con: "+ item.Texto);
+                    }
+                }
 
             }
 
@@ -36,6 +55,13 @@ namespace appEscritorio
         {
             String texto = textBox1.Text;
 
+        }
+
+        private void atras_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form1 f = new Form1();
+            f.Show();
         }
     }
 }

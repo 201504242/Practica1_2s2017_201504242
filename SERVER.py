@@ -1,9 +1,8 @@
+from xml.dom.minidom import parse
 from flask import Flask, request, Response
 app = Flask("EDD_codigo_ejemplo")
 import lista
 import json
-
-
 import os
 listadoIP = lista.Lista()
 
@@ -60,9 +59,30 @@ def leerJSON():
     except:
         return "False"
 
-@app.route("/leerXML",methods=['POST']) #INSERTA DATOS
-def leerJSON():
-    print "a"
+@app.route("/leerXML",methods=['POST'])
+def leerXML():
+    ubicacion = str(request.form['ubicacion'])
+    datasource = open(ubicacion)
+    doc = parse(datasource)
+    s = doc.getElementsByTagName("mensaje")
+    concatIps = ""
+    for mensaje in s:
+        texto = str(mensaje.getElementsByTagName("texto")[0].firstChild.data).strip()
+        print texto
+        ips = mensaje.getElementsByTagName("IP")
+        for ip in ips:
+            concatIps = concatIps + "?" + str(str(ip.firstChild.data).strip()) + "?" + texto
+    return concatIps
+
+@app.route("/mensaje",methods=['POST'])
+def mensaje():
+    inorden = str(request.form['inorden'])
+    buscado = listadoIP.buscar(listadoIP.ipServidor)
+    if buscado is None:
+        return "false"
+    else:
+        buscado.mensajes.add(inorden)
+        return "true"
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
     #app.run(debug=True)

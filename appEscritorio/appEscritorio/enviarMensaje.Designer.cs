@@ -31,6 +31,7 @@
             this.manual = new System.Windows.Forms.Button();
             this.carga = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.atras = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // manual
@@ -61,11 +62,22 @@
             this.textBox1.Size = new System.Drawing.Size(315, 290);
             this.textBox1.TabIndex = 2;
             // 
+            // atras
+            // 
+            this.atras.Location = new System.Drawing.Point(21, 8);
+            this.atras.Name = "atras";
+            this.atras.Size = new System.Drawing.Size(75, 23);
+            this.atras.TabIndex = 3;
+            this.atras.Text = "Atras";
+            this.atras.UseVisualStyleBackColor = true;
+            this.atras.Click += new System.EventHandler(this.atras_Click);
+            // 
             // enviarMensaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(349, 406);
+            this.Controls.Add(this.atras);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.carga);
             this.Controls.Add(this.manual);
@@ -81,5 +93,6 @@
         private System.Windows.Forms.Button manual;
         private System.Windows.Forms.Button carga;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button atras;
     }
 }

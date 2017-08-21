@@ -16,7 +16,7 @@ namespace appEscritorio
     {
         conexion con = new conexion();
         public string datos = "";
-        string IpServidor = "";
+        public static string IpServidor = "";
         public dashboard()
         {
             InitializeComponent();
@@ -50,19 +50,18 @@ namespace appEscritorio
                 if (IpServidor != "False")
                 {
                     datos = con.getConexionPOST(con.getIP(), "listarNodos", "").ToString();
-                    imprimirList(datos);
                     con.getConexionPOST(con.getIP(), "cambiarIP", "");
+                    imprimirList(datos);
                     MessageBox.Show("Leido y asignado IP local correctamente");
-                    timer1.Enabled = true;
-                    
+                    timer1.Enabled = true;                    
                 }
                 else
                 {
                     timer1.Enabled = false;
+                    MessageBox.Show("Problema al leer o asignar Json");
+                    this.Hide();
                     Form1 f = new Form1();
                     f.Show();
-                    this.Hide();
-                    MessageBox.Show("Problema al leer o asignar Json");
 
                 }
             }

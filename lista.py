@@ -1,3 +1,5 @@
+import cola
+
 class Nodo():
     def __init__(self,ip,mascara):
         self.indice = 0
@@ -6,6 +8,7 @@ class Nodo():
         self.mascara = mascara
         self.carnet = ""
         self.siguiente = None
+        self.mensajes = cola.Cola()
 
 class Lista():
     def __init__(self):

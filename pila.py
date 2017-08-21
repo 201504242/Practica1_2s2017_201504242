@@ -139,7 +139,7 @@ class Pila():
                 else:
                     S.add(actual)
                     #print actual
-            print "-------POSTFIJA-------"
+            #print "-------POSTFIJA-------"
             pos=""
             for x in range(0,S.tama):
                 pos=  S.pop() +" "+pos
