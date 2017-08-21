@@ -28,14 +28,22 @@ namespace appEscritorio
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string datos = con.getConexionPOST(con.getIP(), "operar", "ip=" + con.getIP()).ToString();
-            string[] spi = datos.Split(',');
-            textBox1.Text = spi[0];
-            textBox4.Text = spi[1];
-            textBox5.Text = spi[2];
-            textBox6.Text = spi[3];
-            tama = tama - 1;
-            label2.Text = tama.ToString();
+            if (tama >0)
+            {
+                string datos = con.getConexionPOST(con.getIP(), "operar", "ip=" + con.getIP()).ToString();
+                string[] spi = datos.Split(',');
+                textBox1.Text = spi[0];
+                textBox4.Text = spi[1];
+                textBox5.Text = spi[2];
+                textBox6.Text = spi[3];
+                tama = tama - 1;
+                label2.Text = tama.ToString();
+            }
+            else
+            {
+                MessageBox.Show("La cola esta Vacia");
+            }
+            
         }
 
         private void atras_Click(object sender, EventArgs e)

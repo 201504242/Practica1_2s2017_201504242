@@ -144,7 +144,7 @@ class Cola():
 
 if __name__ == '__main__':
     var = Cola()
-    var.add("((2 + 8) * 7 + (7 * (6 + 1)))")
+    var.add("((8 / 3) * 7 + (7 * (6 + 1)))")
 
     #print str(var.pre())
 
