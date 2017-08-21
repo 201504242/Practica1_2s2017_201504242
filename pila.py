@@ -10,41 +10,48 @@ class Pila():
         self.primero = None
         self.ultimo = None
         self.tama = 0
-
+        self.cadenaRes = ""
     def calcular(self,ino):
-        operacion = self.cambioOrden(ino)
-        espacios = operacion.split()
+       # operacion = self.cambioOrden(ino)
+        espacios = ino.split()
         total=0
         # AGREGAR TODOS LOS NUMEROS HASTA ENCONTRAR SIMBOLO
         for x in range(0, espacios.__len__()):
 
             self.add(espacios[x])
+            self.cadenaRes = self.cadenaRes + "push("+espacios[x]+")\n"
             if espacios[x] is "+":
-                print("saca: " + self.pop())
+                self.cadenaRes = self.cadenaRes +"pop() = " +self.pop() + "\n"
                 primero = self.pop()
                 segundo = self.pop()
                 total = int(primero) + int(segundo)
-                print (str(primero) + " + " + str(segundo) + " = " + str(total))
-
+                #print (str(primero) + " + " + str(segundo) + " = " + str(total))
+                self.cadenaRes = self.cadenaRes + str(primero) + " + " +str(segundo )+ " = "+str(total )+"\n"
                 self.add(total)
-
+                self.cadenaRes = self.cadenaRes + "push("+str(total)+")\n"
             elif espacios[x] is "-":
-                print("saca: " + self.pop())
+               # print("saca: " + self.pop())
+                self.cadenaRes = self.cadenaRes + "pop() = " + self.pop() + "\n"
                 primero = self.pop()
                 segundo = self.pop()
                 total = int(segundo) - int(primero)
-                print (str(primero) + " - " + str(segundo) + " = " + str(total))
-
+                #print (str(primero) + " - " + str(segundo) + " = " + str(total))
+                self.cadenaRes = self.cadenaRes + str(primero) + " - " + str(segundo) + " = " + str(total) + "\n"
                 self.add(total)
+                self.cadenaRes = self.cadenaRes + "push(" + str(total) + ")\n"
+
             elif espacios[x] is "*":
-                print("saca: " + self.pop())
+                #print("saca: " + self.pop())
+                self.cadenaRes = self.cadenaRes + "pop() = " + self.pop() + "\n"
                 primero = self.pop()
                 segundo = self.pop()
                 total = int(primero) * int(segundo)
-                print (str(primero) + " * " + str(segundo) + " = " + str(total))
-
+                #print (str(primero) + " * " + str(segundo) + " = " + str(total))
+                self.cadenaRes = self.cadenaRes + str(primero) + " * " + str(segundo) + " = " + str(total) + "\n"
                 self.add(total)
-        print total
+                self.cadenaRes = self.cadenaRes + "push("+str(total)+")\n"
+
+        return str(self.cadenaRes.strip())+","+str(total)
 
     def add(self,dato):
         nuevo = Nodo(dato)
@@ -186,6 +193,6 @@ if __name__ == '__main__':
    # var.calcular("2 5 + 3 * 2 +")
     #var.calcular("3 1 + 8 3 * 2 - +")
     #post = var.cambioOrden("(2*(23+6)-1)")
-    var.calcular("(2 5 + 3 * 2 +)")
+    print var.calcular("((2 + 8) * 7 + (7 * (6 + 1))))")
 
     #print(var.pop())

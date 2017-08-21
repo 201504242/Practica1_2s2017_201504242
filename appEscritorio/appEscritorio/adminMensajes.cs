@@ -30,5 +30,12 @@ namespace appEscritorio
             enviarMensaje env = new enviarMensaje();
             env.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            colaMensajes me = new colaMensajes();
+            me.Show();
+        }
     }
 }

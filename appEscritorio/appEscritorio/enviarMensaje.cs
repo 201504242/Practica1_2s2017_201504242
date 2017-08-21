@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace appEscritorio
 {
@@ -54,14 +55,49 @@ namespace appEscritorio
         private void manual_Click(object sender, EventArgs e)
         {
             String texto = textBox1.Text;
+            string[] lines = texto.Split('\n');
 
+            XmlTextWriter writer = new XmlTextWriter("C:\\Users\\p_ab1\\Desktop\\product.xml", System.Text.Encoding.UTF8);
+            writer.WriteStartDocument(true);
+            writer.Formatting = Formatting.Indented;
+            writer.Indentation = 2;
+            writer.WriteStartElement("Mensajes");
+            createNode("1", writer);
+            createNode("2", writer);
+            createNode("3", writer);
+            createNode("4", writer);
+
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Close();
+            MessageBox.Show("XML File created ! ");
         }
-
+        private void createNode(string pID, XmlTextWriter writer)
+        {
+            writer.WriteStartElement("Mensaje");
+            writer.WriteStartElement("Nodo");
+            writer.WriteStartElement("IP");
+            writer.WriteString(pID);
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+        }
         private void atras_Click(object sender, EventArgs e)
         {
             this.Hide();
             Form1 f = new Form1();
             f.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string ma = "((2?8) * 7 ? (7 * (6 ? 1)))";
+            string metodoMensaje = con.getConexionPOST(con.getIP(), "mensaje", "inorden="+ma).ToString();
+            if (metodoMensaje.Equals("true"))
+            {
+                MessageBox.Show("todo bien");
+            }
+        }
+
     }
 }

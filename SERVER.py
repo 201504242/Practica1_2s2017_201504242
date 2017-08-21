@@ -1,7 +1,7 @@
 from xml.dom.minidom import parse
 from flask import Flask, request, Response
 app = Flask("EDD_codigo_ejemplo")
-import lista
+import lista,pila
 import json
 import os
 listadoIP = lista.Lista()
@@ -77,12 +77,38 @@ def leerXML():
 @app.route("/mensaje",methods=['POST'])
 def mensaje():
     inorden = str(request.form['inorden'])
+    inorden = inorden.replace('?','+')
     buscado = listadoIP.buscar(listadoIP.ipServidor)
     if buscado is None:
         return "false"
     else:
         buscado.mensajes.add(inorden)
         return "true"
+
+@app.route("/tamaCola",methods=['POST'])
+def tamaCola():
+    ip = str(request.form['ip'])
+    buscado = listadoIP.buscar(listadoIP.ipServidor)
+    if buscado is None:
+        return "false"
+    else:
+        return str(buscado.mensajes.tama)
+
+@app.route("/operar",methods=['POST'])
+def operar():
+    ip = str(request.form['ip'])
+
+    bus = listadoIP.buscar(listadoIP.ipServidor)
+    pre = bus.mensajes.pre()
+    primero = bus.mensajes.pop()
+
+    if primero == "COLA VACIA":
+        return "false"
+    else:
+        pilita = pila.Pila()
+        cadena = pilita.calcular(primero) + "," +pre +","+ primero
+        return cadena
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
     #app.run(debug=True)

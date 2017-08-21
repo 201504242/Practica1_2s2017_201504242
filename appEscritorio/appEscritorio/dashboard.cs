@@ -46,7 +46,7 @@ namespace appEscritorio
             {
                 path = file.FileName;
                 
-                 IpServidor = con.getConexionPOST(con.getIP(), "leerJSON", "ubicacion="+path).ToString();
+                IpServidor = con.getConexionPOST(con.getIP(), "leerJSON", "ubicacion="+path).ToString();
                 if (IpServidor != "False")
                 {
                     datos = con.getConexionPOST(con.getIP(), "listarNodos", "").ToString();
@@ -93,6 +93,19 @@ namespace appEscritorio
                 listView1.Items.Add(itm);
             }
             label1.Text = "Este Nodo: " + con.getIP();
+        }
+
+        private void dashboard_Load(object sender, EventArgs e)
+        {
+            if (con.getIP().Equals(IpServidor))
+            {
+                timer1.Enabled = true;
+                Console.WriteLine("empieza hilo");
+            }else
+            {
+                timer1.Enabled = false;
+                Console.WriteLine("no empezo hilo");
+            }
         }
     }
 }

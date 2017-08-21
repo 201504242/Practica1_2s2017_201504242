@@ -90,6 +90,7 @@
             this.Controls.Add(this.Json);
             this.Name = "dashboard";
             this.Text = "Atras";
+            this.Load += new System.EventHandler(this.dashboard_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

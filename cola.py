@@ -1,17 +1,18 @@
 import pila
 class Nodo():
-    def __init__(self, operaciones):
+    def __init__(self, pre,operaciones):
         self.operaciones = operaciones
         self.siguiente = None
-
+        self.postorden = operaciones
+        self.pre = pre
 class Cola():
     def __init__(self):
         self.primero = None
         self.tama = 0
-
     def add(self,operaciones):
+        pre = operaciones
         operaciones = self.cambioOrden(operaciones)
-        nuevoNodo = Nodo(operaciones)
+        nuevoNodo = Nodo(pre,operaciones)
         if self.primero is None:
             self.primero = nuevoNodo
         else:
@@ -40,7 +41,10 @@ class Cola():
             return auxiliar.operaciones
         return "COLA VACIA"
 
-
+    def pre(self):
+        if self.primero != None:
+            auxiliar = self.primero
+            return auxiliar.pre
     def depurador(self,cadenaInorden):
         cadena = cadenaInorden
         concat = ""
@@ -140,7 +144,13 @@ class Cola():
 
 if __name__ == '__main__':
     var = Cola()
-    var.add("(2 5 + 3 * 2 +)")
+    var.add("((2 + 8) * 7 + (7 * (6 + 1)))")
+
+    #print str(var.pre())
+
+    pilita = pila.Pila()
+    print pilita.calcular(var.pop())
+
     #var.add("15 20 +")
     #var.add("2 3 5 - *")
     #var.add("2 8 + 4 * 7 -")
